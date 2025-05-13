@@ -4,10 +4,10 @@
 I'm training efficient coding-specific Large Language Models (LLMs) using **Meta's CodeLlama-7b-Instruct**
 as the base model, optimized for local execution on consumer-grade hardware. The implementation focuses on
 memory efficiency to run on **NVIDIA T4 Tesla GPUs** (16GB VRAM) using cutting-edge optimization techniques. 
-```
+
 ![LLM Optimization](https://img.shields.io/badge/LLM-Optimized-brightgreen) 
 ![T4 Compatible](https://img.shields.io/badge/NVIDIA-T4_Supported-success)
-```
+
 ## 🛠 Key Components
 ```python
 {
