@@ -6,7 +6,6 @@ I'm training efficient coding-specific Large Language Models (LLMs) using **Meta
 
 ![LLM Optimization](https://img.shields.io/badge/LLM-Optimized-brightgreen) 
 ![T4 Compatible](https://img.shields.io/badge/NVIDIA-T4_Supported-success)
-
 ## 🛠 Key Components
 ```python
 {
