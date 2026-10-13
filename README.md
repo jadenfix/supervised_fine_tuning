@@ -88,3 +88,16 @@ torch==2.1.0+cu121
 transformers==4.35.0
 accelerate==0.25.0
 ```
+
+## Executable CPU adapter training and reload
+
+```bash
+python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+python -m pip install -r requirements-cpu.txt
+python -m unittest discover -s tests -v
+python cpu_sft.py --steps 20
+```
+
+This performs real LoRA optimization on the pinned public TinyStories-1M checkpoint (3.75M total parameters) with 16 public Python-code instruction examples and 8 separate heldout examples. Instructions/responses are explicitly truncated for the CPU lane; prompt and padding tokens are excluded from supervised loss. It records before/after heldout loss, changed adapter parameters and exact-logit adapter reload, then runs actual generation. Model/dataset downloads require network on first execution. Artifacts live under cpu-sft-output.
+
+The tiny base model is trained for stories; generated code quality is not established (the bounded run's code probe may produce no usable answer). This is a pipeline experiment, not a reproduction of the original 7B GPU QLoRA experiments or evidence of capability retention. Sources: https://huggingface.co/roneneldan/TinyStories-1M and https://huggingface.co/datasets/iamtarun/python_code_instructions_18k_alpaca .
