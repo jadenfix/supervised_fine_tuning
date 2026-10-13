@@ -65,8 +65,20 @@ graph TD
     F --> H[Torch 2.1+]
 ```
 
-## 🏆 Key Achievement
-> 🔥 **Breakthrough Optimization**: Successfully fine-tuned 7B parameter model on single T4 GPU while maintaining >95% of original model capabilities through strategic QLoRA implementation and memory-aware training policies.
+## Validation boundary
+
+This is a GPU notebook experiment. Training has not been rerun in this CPU-only
+environment, and no held-out capability retention score is established here.
+Run the CodeLlama and TinyLlama cells as separate experiments: each loads its
+own model and data. The Alpaca lane now builds its text column from
+instruction/input/output, and both lanes save the trained adapter and tokenizer
+so the output can be reloaded instead of being lost when the session ends.
+
+The notebook uses the older SFTTrainer API (`tokenizer`, `dataset_text_field`,
+`max_seq_length`). Match that API when installing TRL; the unpinned Colab install
+cells need a compatibility review before a reproducible GPU run. Final training
+demos require saved adapter reload plus a held-out evaluation, not training loss
+alone.
 
 ---
 
