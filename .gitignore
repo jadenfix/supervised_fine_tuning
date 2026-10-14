@@ -1,3 +1,5 @@
 cpu-sft-output*/
 __pycache__/
 .venv/
+quality-sft-output/
+__pycache__/

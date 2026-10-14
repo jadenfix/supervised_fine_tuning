@@ -1,0 +1,26 @@
+name: Complete-record adapter comparison
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  baseline-adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      HF_HUB_DISABLE_XET: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - run: pip install -r requirements-cpu.txt
+      - run: python -m unittest discover -s tests -p test_quality.py -v
+      - run: python quality_sft.py --steps 64
+      - name: Preserve exact inputs, split, adapter and all held-out outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: complete-record-comparison-${{ github.sha }}
+          path: quality-sft-output/
+          if-no-files-found: error
