@@ -15,8 +15,9 @@ jobs:
           python-version: '3.12'
       - run: pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
       - run: pip install -r requirements-cpu.txt
-      - run: python -m unittest discover -s tests -p test_quality.py -v
+      - run: python -m unittest discover -s tests -v
       - run: python quality_sft.py --steps 64
+      - run: python audit_code_data.py quality-sft-output/source-rows.json --output quality-sft-output/reference-audit.json
       - name: Preserve exact inputs, split, adapter and all held-out outputs
         if: always()
         uses: actions/upload-artifact@v4

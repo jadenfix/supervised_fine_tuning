@@ -134,3 +134,13 @@ experiments and broad capability retention are still unvalidated.
 Source: https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct (Apache-2.0).
 CI uploads the saved inputs, exact split, adapter, tokenizer, raw measurements and
 comparison page for independent inspection; generated artifacts are not committed.
+
+### Public-data quality matters
+
+The inspected 100-record snapshot contains **9 references that do not parse as
+Python** (source indexes 7, 38, 39, 41, 43, 48, 49, 53, 84). Some syntactically valid
+answers also require missing trained classifiers or demonstrate insecure toy
+“encryption”. These are dataset weaknesses, not gold-standard functional labels.
+A likelihood gain on these answers must not be presented as improved correctness
+or security. The comparison shows the original references next to every model
+answer so an evaluator can inspect the evidence. No generated code is executed.
